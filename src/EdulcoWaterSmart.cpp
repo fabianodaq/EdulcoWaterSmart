@@ -1,4 +1,7 @@
 #include "EdulcoWaterSmart.h"
+#include "05_AppHW.h"
+#include "02_AppSensors.h"
+#include "01_AppControls.h"
 
 EdulcoWaterSmart::EdulcoWaterSmart()
 {
@@ -6,6 +9,9 @@ EdulcoWaterSmart::EdulcoWaterSmart()
 
 bool EdulcoWaterSmart::begin()
 {
+    HW_InitHw();
+    Ctrl_InitControls();
+    Sens_InitSens();
     return true;
 }
 
