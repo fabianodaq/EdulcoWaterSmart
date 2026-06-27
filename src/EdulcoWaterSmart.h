@@ -3,12 +3,6 @@
 
 #include <Arduino.h>
 
-enum EdulcoChannel {
-    EDULCO_CH1 = 1,
-    EDULCO_CH2 = 2,
-    EDULCO_CH3 = 3,
-    EDULCO_CH4 = 4
-};
 
 class EdulcoWaterSmart
 {
@@ -16,27 +10,14 @@ public:
     EdulcoWaterSmart();
 
     bool begin();
-
-    float getPH(EdulcoChannel channel);
-    float getORP(EdulcoChannel channel);
-
-    float getTemperatureNTC(EdulcoChannel channel);
+    bool setRelay(uint8_t relayNum, bool state);
+    
     float getTemperatureDS18();
+    float getTemperatureNTC();
+    float getEc();
+    float getPh(uint8_t channel);
+    float getOrp(uint8_t channel);
 
-    float getEC(EdulcoChannel channel);
-    float getTDS(EdulcoChannel channel);
-    float getSAL(EdulcoChannel channel);
-
-private:
-    float readAnalogChannel(EdulcoChannel channel);
-
-    float convertPH(float raw);
-    float convertORP(float raw);
-    float convertNTC(float raw);
-    float convertEC(float raw);
-
-    float ecToTDS(float ec);
-    float ecToSAL(float ec);
 };
 
 #endif

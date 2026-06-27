@@ -1,7 +1,6 @@
 #include "EdulcoWaterSmart.h"
 #include "05_AppHW.h"
-#include "02_AppSensors.h"
-#include "01_AppControls.h"
+#include "02_EdulcoSensors.h"
 
 EdulcoWaterSmart::EdulcoWaterSmart()
 {
@@ -10,77 +9,41 @@ EdulcoWaterSmart::EdulcoWaterSmart()
 bool EdulcoWaterSmart::begin()
 {
     HW_InitHw();
-    Ctrl_InitControls();
     Sens_InitSens();
     return true;
 }
 
-float EdulcoWaterSmart::getPH(EdulcoChannel channel)
+bool EdulcoWaterSmart::setRelay(uint8_t relayNum, bool state)
 {
-    return 7.00;
-}
-
-float EdulcoWaterSmart::getORP(EdulcoChannel channel)
-{
-    return 250.0;
-}
-
-float EdulcoWaterSmart::getTemperatureNTC(EdulcoChannel channel)
-{
-    return 25.0;
+    return HW_SetRelay(relayNum, state);
 }
 
 float EdulcoWaterSmart::getTemperatureDS18()
 {
-    return 24.8;
+    float tempC = Sens_DS18_Get();
+    if (isnan(tempC)) {
+        return NAN;
+    }
+    return tempC;
 }
 
-float EdulcoWaterSmart::getEC(EdulcoChannel channel)
+float EdulcoWaterSmart::getTemperatureNTC()
 {
-    return 1.50;
+    float ntcC = Sens_Ntc_Get();
+    return ntcC;
 }
 
-float EdulcoWaterSmart::getTDS(EdulcoChannel channel)
+float EdulcoWaterSmart::getEc()
 {
-    return 750.0;
+    return Sens_Ec_Get();
 }
 
-float EdulcoWaterSmart::getSAL(EdulcoChannel channel)
+float EdulcoWaterSmart::getPh(uint8_t channel)
 {
-    return 0.80;
+    return Sens_Ph_Get(channel);
 }
 
-float EdulcoWaterSmart::readAnalogChannel(EdulcoChannel channel)
+float EdulcoWaterSmart::getOrp(uint8_t channel)
 {
-    return 0.0;
-}
-
-float EdulcoWaterSmart::convertPH(float raw)
-{
-    return raw;
-}
-
-float EdulcoWaterSmart::convertORP(float raw)
-{
-    return raw;
-}
-
-float EdulcoWaterSmart::convertNTC(float raw)
-{
-    return raw;
-}
-
-float EdulcoWaterSmart::convertEC(float raw)
-{
-    return raw;
-}
-
-float EdulcoWaterSmart::ecToTDS(float ec)
-{
-    return ec;
-}
-
-float EdulcoWaterSmart::ecToSAL(float ec)
-{
-    return ec;
+    return Sens_Orp_Get(channel);
 }

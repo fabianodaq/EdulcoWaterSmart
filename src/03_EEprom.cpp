@@ -2,6 +2,8 @@
 
 void        EEPR_WriteCh32  (int start, const char* data);
 void        EEPR_ReadCh32   (int start, char* buffer);
+void        EEPR_WriteCh16  (int start, const char* data);
+void        EEPR_ReadCh16   (int start, char* buffer);
 
 void        EEPR_WriteByte  (int addr, uint8_t value);
 uint8_t     EEPR_ReadByte   (int addr);
@@ -11,9 +13,6 @@ uint16_t    EEPR_ReadUint16 (int addr);
 
 void        EEPR_WriteInt16 (int addr, int16_t value);
 int16_t     EEPR_ReadInt16  (int addr);
-
-
-
 
 
 void EEPR_WriteCh32(int start, const char* data) {

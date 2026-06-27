@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "05_AppHW.h"
+#include "03_EEprom.h"
 
 
 void HW_InitHw();
@@ -10,6 +12,7 @@ void SensEc_SetOff();
 void SensEc_Depolarize();
 void SensEc_SetHighRange();
 
+bool HW_SetRelay(uint8_t relayNum, bool state);
 
 
 
@@ -38,8 +41,26 @@ void HW_InitHw(){
   // for DS18B20
   pinMode(DS18B20_PIN, INPUT); //in other module it is initialized for one wire functions
 
-  PicSerial.begin(9600, SERIAL_8N1, RX_PIN, TX_PIN);
 
+
+}
+
+bool HW_SetRelay(uint8_t relayNum, bool state)
+{
+    uint8_t relayPin = 0;
+
+    if (relayNum == 1) {
+        relayPin = RELAY_1;
+    } else if (relayNum == 2) {
+        relayPin = RELAY_2;
+    } else if (relayNum == 3) {
+        relayPin = RELAY_3;
+    } else {
+        return false;
+    }
+
+    digitalWrite(relayPin, state ? HIGH : LOW);
+    return true;
 }
 
 
