@@ -1,99 +1,99 @@
-# Podcast Mini Guide - EdulcoWaterSmart Project
+# Podcast mini guida - Progetto EdulcoWaterSmart
 
-This guide is designed as a short podcast script to include in the repository.
-Goal: explain in a simple and practical way how to start, understand, and test the project step by step.
+Questa guida e pensata come traccia podcast breve da inserire in repository.
+Obiettivo: spiegare in modo semplice e pratico come avviare, capire e testare il progetto passo passo.
 
-## Recommended Duration
+## Durata consigliata
 
-15-20 minutes.
+15-20 minuti.
 
-## Audience
+## Pubblico
 
-- Developers opening the project for the first time
-- Technicians who need quick ESP32 tests
-- Anyone integrating HTTP commands into Home Assistant
+- Sviluppatori che aprono il progetto per la prima volta
+- Tecnici che devono fare test rapidi su ESP32
+- Chi vuole integrare i comandi HTTP in Home Assistant
 
-## Episode Outline
+## Scaletta episodio
 
-## 1) Intro (1 minute)
+## 1) Intro (1 minuto)
 
-Suggested text:
-Hello, in this episode we will see how to use EdulcoWaterSmart in a practical way.
-We start from the repository structure, upload the example to ESP32, and then test HTTP smart commands.
-By the end, you will know how to safely add a new command.
+Testo suggerito:
+Ciao, in questa puntata vediamo come usare EdulcoWaterSmart in modalita pratica.
+Partiamo dalla struttura del repository, carichiamo l esempio su ESP32, poi facciamo i test via HTTP con i comandi smartcommand.
+Alla fine saprai come aggiungere un comando nuovo in sicurezza.
 
-## 2) Repository Overview (2 minutes)
+## 2) Panoramica repository (2 minuti)
 
-Explain these points:
-- The main library is in the src folder and contains sensor/control logic.
-- Examples are in the examples folder.
-- For the web/Home Assistant demo, use examples/EdulcoHomeAssistant/EdulcoHomeAssistant.ino.
-- In docs you can find this guide and supporting material.
+Spiega questi punti:
+- La libreria principale sta nella cartella src e contiene logica sensori e controlli.
+- Gli esempi stanno in examples.
+- Per la demo web e Home Assistant usa examples/EdulcoHomeAssistant/EdulcoHomeAssistant.ino.
+- In docs trovi questa guida e materiale di supporto.
 
-## 3) Quick Hardware and Firmware Setup (3 minutes)
+## 3) Setup rapido hardware e firmware (3 minuti)
 
-Steps to explain:
-1. Connect ESP32 to your PC.
-2. Open examples/EdulcoHomeAssistant/EdulcoHomeAssistant.ino in Arduino IDE.
-3. Select the correct ESP32 board and serial port.
-4. Set Wi-Fi SSID and password in the example file.
-5. Compile and upload.
-6. Open Serial Monitor at 115200 to verify startup and assigned IP.
+Passaggi da raccontare:
+1. Collega ESP32 al PC.
+2. Apri examples/EdulcoHomeAssistant/EdulcoHomeAssistant.ino in Arduino IDE.
+3. Imposta board ESP32 e porta seriale corretta.
+4. Inserisci SSID e password Wi-Fi nel file esempio.
+5. Compila e carica.
+6. Apri monitor seriale a 115200 per verificare startup e IP assegnato.
 
-## 4) What the Example Does (2 minutes)
+## 4) Cosa fa l esempio (2 minuti)
 
-Simple explanation:
-- Initializes EdulcoWaterSmart.
-- Connects ESP32 to Wi-Fi.
-- Starts an HTTP server on port 80.
-- Exposes POST endpoint /smartcommand.
-- Prints sensor values periodically to Serial.
+Spiegazione semplice:
+- Inizializza EdulcoWaterSmart.
+- Connette ESP32 alla rete Wi-Fi.
+- Avvia server HTTP su porta 80.
+- Espone endpoint POST /smartcommand.
+- Stampa periodicamente i valori sensori su seriale.
 
-## 5) Step-by-Step HTTP Command Testing (4 minutes)
+## 5) Test comandi HTTP passo passo (4 minuti)
 
-Use a PC on the same network as the module.
-Replace IP with the one shown in Serial Monitor.
+Usa un PC nella stessa rete del modulo.
+Sostituisci IP con quello visto nel monitor seriale.
 
-Basic commands:
+Comandi base:
 - curl -X POST http://IP/smartcommand -d "cmd=getdeviceabout"
 - curl -X POST http://IP/smartcommand -d "cmd=getcontrolstatus&ctrl=0"
 - curl -X POST http://IP/smartcommand -d "cmd=setrelay&relay=1&status=true"
 - curl -X POST http://IP/smartcommand -d "cmd=setrelay&relay=1&status=false"
 
-Recommended error checks:
-- unknown cmd
-- relay out of range
-- invalid status
+Controlli errore consigliati:
+- cmd sconosciuto
+- relay fuori range
+- status non valido
 
-## 6) How to Add a New Command (4 minutes)
+## 6) Come aggiungere un comando nuovo (4 minuti)
 
-Recommended workflow:
-1. Open function WSER_handleSmartCommand.
-2. Add a new else if branch with your cmd name.
-3. Validate all input parameters.
-4. Execute action using existing g_device APIs.
-5. Return HTTP 200 on success or 400 on error.
-6. Test with curl and verify invalid cases too.
+Workflow consigliato:
+1. Apri funzione WSER_handleSmartCommand.
+2. Aggiungi nuovo ramo else if con nome cmd.
+3. Valida tutti i parametri in ingresso.
+4. Esegui azione usando API gia presenti su g_device.
+5. Rispondi con HTTP 200 su successo o 400 su errore.
+6. Testa con curl e verifica anche i casi invalidi.
 
-Practical rules:
-- Keep commands simple and readable.
-- Do not add unnecessary dependencies in first release.
-- Avoid complex logic in the HTTP parser; delegate to the library when possible.
+Regole pratiche:
+- Mantieni i comandi semplici e leggibili.
+- Non introdurre dipendenze non necessarie nella prima release.
+- Evita logica complessa nel parser HTTP, delega il piu possibile alla libreria.
 
-## 7) Episode Closing (1 minute)
+## 7) Chiusura episodio (1 minuto)
 
-Suggested text:
-In this guide we covered repository structure, firmware upload, API testing, and how to add new commands.
-In the next episode we can cover endpoint authentication, advanced logging, and full Home Assistant automation integration.
+Testo suggerito:
+In questa guida abbiamo visto struttura, upload firmware, test API e aggiunta di nuovi comandi.
+Nel prossimo episodio possiamo coprire autenticazione endpoint, logging avanzato e integrazione completa con automazioni Home Assistant.
 
-## Final Checklist Before Publishing
+## Check finale per publish in repository
 
-- Clear title
-- Episode duration
-- Minimal prerequisites
-- Numbered steps
-- Verification commands
-- Common errors
-- Next steps
+- Titolo chiaro
+- Durata episodio
+- Prerequisiti minimi
+- Passi numerati
+- Comandi di verifica
+- Errori comuni
+- Prossimi step
 
-End of guide.
+Fine guida.
