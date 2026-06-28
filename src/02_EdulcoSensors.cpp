@@ -52,14 +52,12 @@ void Sens_InitSens()
         EEPR_WriteInt16 (SENS_2_CAL_X2, 1798);
         EEPR_WriteInt16 (SENS_2_CAL_Y2, 1800);
 
-        EEPR_WriteByte(SENS_3_TYPE, _NTC);
+        EEPR_WriteByte(SENS_EC_TYPE, _EC);
 
-        EEPR_WriteByte(SENS_4_TYPE, _EC);
-
-        EEPR_WriteInt16 (SENS_4_CAL_X1, 500);
-        EEPR_WriteInt16 (SENS_4_CAL_Y1, 500);
-        EEPR_WriteInt16 (SENS_4_CAL_X2, 2000);
-        EEPR_WriteInt16 (SENS_4_CAL_Y2, 2000);
+        EEPR_WriteInt16 (SENS_EC_CAL_X1, 500);
+        EEPR_WriteInt16 (SENS_EC_CAL_Y1, 500);
+        EEPR_WriteInt16 (SENS_EC_CAL_X2, 2000);
+        EEPR_WriteInt16 (SENS_EC_CAL_Y2, 2000);
 
 
         EEPR_WriteByte(EEPROM_INIT_FLAG_SENS_ADDR       ,EEPROM_INIT_SENS_FLAG      ); //---- Init EEProm as initialized----
@@ -82,14 +80,12 @@ void Sens_InitSens()
     SensPhRx[1].CalX2           =  EEPR_ReadInt16(SENS_2_CAL_X2);
     SensPhRx[1].CalY2           =  EEPR_ReadInt16(SENS_2_CAL_Y2);
 
-    SensNtc.type            = (e_SensType) (EEPR_ReadByte(SENS_3_TYPE));
+    SensEc.type            = (e_SensType) (EEPR_ReadByte(SENS_EC_TYPE));
 
-    SensEc.type            = (e_SensType) (EEPR_ReadByte(SENS_4_TYPE));
-
-    SensEc.CalX1           =  EEPR_ReadInt16(SENS_4_CAL_X1);
-    SensEc.CalY1           =  EEPR_ReadInt16(SENS_4_CAL_Y1);
-    SensEc.CalX2           =  EEPR_ReadInt16(SENS_4_CAL_X2);
-    SensEc.CalY2           =  EEPR_ReadInt16(SENS_4_CAL_Y2);
+    SensEc.CalX1           =  EEPR_ReadInt16(SENS_EC_CAL_X1);
+    SensEc.CalY1           =  EEPR_ReadInt16(SENS_EC_CAL_Y1);
+    SensEc.CalX2           =  EEPR_ReadInt16(SENS_EC_CAL_X2);
+    SensEc.CalY2           =  EEPR_ReadInt16(SENS_EC_CAL_Y2);
 
 
 }
@@ -100,7 +96,9 @@ void Sens_InitSens()
 //-----------------------------------------------------------------------------
 //--- Private Functions Definitions -------------------------------------------
 //-----------------------------------------------------------------------------
-/**
+
+
+ /**
 
  */
  float Sens_Ph_Get(uint8_t channel)

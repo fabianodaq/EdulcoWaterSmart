@@ -73,89 +73,10 @@
 #define TEMP_SENSOR_SCALE_FACTOR      0.1f
 
 
-typedef enum            
-{  
-    _TEMP	=	0,  
-    _HUM	=	1, 
-    _TIMER	=	2,       
-    _PH		=	3,    
-    _RX		=	4, 
-	_NTC	=	5,
-	_DIFF	=	6,
-	_AVG	=   7,   
-	_EC		=	8,
-	_TDS	=	9,
-	_SAL	=	10, 
-   	_DS18	=	11, 
-	_EMPTY	=	12 
-}	e_SensType;
 
 
-#define NUM_SENS_PH_RX 2
 
 
-typedef struct
-{
-    e_SensType  type;
-    long        valueMcp3424;
-    uint8_t     ui8Err;
-
-    int         valueFiltTemp;
-    int         valueFilt;
-    int         valueIst;
-
-    long        valueBuff[4];
-    uint8_t     idxLast;
-
-    int         CalX1;
-    int         CalY1;
-    int         CalX2;
-    int         CalY2;
-} t_PhOrpSensor;
-
-
-typedef struct	 // EC/TDS/SAL
-{
-	e_SensType 	type;		
-
-	long	  valueMcp3424;
-    int		  valueFiltTemp;
-    int       valueFilt;
-	int       value;	
-	uint8_t   ui8Err;
-
-	long	  valueBuff[4];
-	uint8_t	  idxLast;
-
-	int		  CalX1;   
-	int		  CalY1;
-	int		  CalX2;   
-	int		  CalY2;
-
-}	t_SensorEc;
-
-
-typedef struct	 // EC/TDS/SAL
-{
-	e_SensType 	type;		
-
-	long	  valueMcp3424;
-    int		  valueFiltTemp;
-    int       valueFilt;
-	int       value;	
-	uint8_t   ui8Err;
-
-	long	  valueBuff[4];
-	uint8_t	  idxLast;
-
-}	t_SensorNtc;
-
-typedef struct	 // EC/TDS/SAL
-{		
-
-    float Ds18Value;
-
-}	t_SensorDs18;
 
 
 
