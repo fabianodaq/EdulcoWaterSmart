@@ -1,8 +1,6 @@
 #include "EdulcoWaterSmart.h"
 
 
-
-
 EdulcoWaterSmart::EdulcoWaterSmart()
 {
 }
@@ -17,6 +15,21 @@ bool EdulcoWaterSmart::begin()
 bool EdulcoWaterSmart::setRelay(uint8_t relayNum, bool state)
 {
     return HW_SetRelay(relayNum, state);
+}
+
+bool EdulcoWaterSmart::setControlType(uint8_t ctrlIndex, const String& typeStr)
+{
+    return CTRL_SetType(ctrlIndex, typeStr);
+}
+
+bool EdulcoWaterSmart::setControlCalPoint(uint8_t sensNumb, uint8_t calPoint, int16_t calValue)
+{
+    return CTRL_SetCalPoint(sensNumb, calPoint, calValue);
+}
+
+bool EdulcoWaterSmart::resetControlCalPoint(uint8_t sensNumb, uint8_t calPoint)
+{
+    return CTRL_ResetCalPoint(sensNumb, calPoint);
 }
 
 
@@ -40,6 +53,41 @@ float EdulcoWaterSmart::getOrp(uint8_t channel)
     return Sens_Orp_Get(channel);
 }
 
+void EdulcoWaterSmart::getCalPointPhOrp_1_Y1(int* s_ycal)
+{
+    s_ycal[0] = SensPhRx[0].CalY1;
+    s_ycal[1] = SensPhRx[0].CalX1;
+}
+
+void EdulcoWaterSmart::getCalPointPhOrp_1_Y2(int* s_ycal)
+{
+    s_ycal[0] = SensPhRx[0].CalY2;
+    s_ycal[1] = SensPhRx[0].CalX2;
+}
+
+void EdulcoWaterSmart::getCalPointPhOrp_2_Y1(int* s_ycal)
+{
+    s_ycal[0] = SensPhRx[1].CalY1;
+    s_ycal[1] = SensPhRx[1].CalX1;
+}
+
+void EdulcoWaterSmart::getCalPointPhOrp_2_Y2(int* s_ycal)
+{
+    s_ycal[0] = SensPhRx[1].CalY2;
+    s_ycal[1] = SensPhRx[1].CalX2;
+}
+
+void EdulcoWaterSmart::getCalPointEcTdsSal_Y1(int* s_ycal)
+{
+    s_ycal[0] = SensEc.CalY1;
+    s_ycal[1] = SensEc.CalX1;
+}
+
+void EdulcoWaterSmart::getCalPointEcTdsSal_Y2(int* s_ycal)
+{
+    s_ycal[0] = (float)SensEc.CalY2;
+    s_ycal[1] = (float)SensEc.CalX2;
+}
 
 e_SensType EdulcoWaterSmart::getEcTdsSalType()
 {

@@ -16,20 +16,17 @@ typedef enum
 typedef struct
 {
     e_SensType  type;
+
     long        valueMcp3424;
     uint8_t     ui8Err;
 
-    int         valueFiltTemp;
-    int         valueFilt;
     int         valueIst;
-
-    long        valueBuff[4];
-    uint8_t     idxLast;
 
     int         CalX1;
     int         CalY1;
     int         CalX2;
     int         CalY2;
+
 } t_PhOrpSensor;
 
 
@@ -38,13 +35,13 @@ typedef struct	 // EC/TDS/SAL
 	e_SensType 	type;		
 
 	long	  valueMcp3424;
-    int		  valueFiltTemp;
-    int       valueFilt;
+	int       valueFiltTemp;
+	int       valueFilt;
 	int       value;	
 	uint8_t   ui8Err;
 
-	long	  valueBuff[4];
-	uint8_t	  idxLast;
+	long      valueBuff[4];
+	uint8_t   idxLast;
 
 	int		  CalX1;   
 	int		  CalY1;
@@ -54,31 +51,8 @@ typedef struct	 // EC/TDS/SAL
 }	t_SensorEc;
 
 
-typedef struct	 // EC/TDS/SAL
-{
-
-	long	  valueMcp3424;
-    int		  valueFiltTemp;
-    int       valueFilt;
-	int       value;	
-	uint8_t   ui8Err;
-
-	long	  valueBuff[4];
-	uint8_t	  idxLast;
-
-}	t_SensorNtc;
-
-typedef struct	 // EC/TDS/SAL
-{		
-
-    float Ds18Value;
-
-}	t_SensorDs18;
-
 extern t_PhOrpSensor   SensPhRx[NUM_SENS_PH_RX];
 extern t_SensorEc      SensEc;
-extern t_SensorNtc     SensNtc;
-extern t_SensorDs18    SensDs18;
 
 //------- Global variables---------------
 extern void Sens_InitSens();

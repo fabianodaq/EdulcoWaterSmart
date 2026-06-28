@@ -126,8 +126,6 @@ static const uint16_t NTC_ADC_HIGH_TEMP[51] PROGMEM = {
 // Sensors data structure
 t_PhOrpSensor   SensPhRx[NUM_SENS_PH_RX];
 t_SensorEc      SensEc;
-t_SensorNtc     SensNtc;
-t_SensorDs18    SensDs18;
 
 // hw sensors structs
 MCP342x adc(MCP3424_ADDR);
